@@ -4,6 +4,7 @@
  * @author darcrand
  */
 
+import { useProfile } from '@/stores/use-profile'
 import { useRouter } from 'expo-router'
 import { Pressable, Text, View } from 'react-native'
 
@@ -11,6 +12,16 @@ export default function SignIn() {
   const router = useRouter()
 
   const onBack = () => {
+    router.canDismiss() ? router.dismiss() : router.replace('/')
+  }
+
+  const [, setProfile] = useProfile()
+  const onLogin = () => {
+    setProfile({
+      name: 'darcrand',
+      email: '6y3mM@example.com',
+      avatar: 'https://i.pravatar.cc/300',
+    })
     router.canDismiss() ? router.dismiss() : router.replace('/')
   }
 
@@ -22,7 +33,9 @@ export default function SignIn() {
         </Pressable>
       </View>
 
-      <Text>SignIn</Text>
+      <Pressable onPress={onLogin}>
+        <Text>登录</Text>
+      </Pressable>
     </>
   )
 }
