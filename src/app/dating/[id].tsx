@@ -12,7 +12,10 @@ export default function DatingDetail() {
   const { id } = useLocalSearchParams()
   return (
     <>
-      <Pressable style={{ marginTop: 80 }} onPress={() => router.back()}>
+      <Pressable
+        style={{ marginTop: 80 }}
+        onPress={() => (router.canDismiss() ? router.dismiss() : router.replace('/'))}
+      >
         <Text>返回</Text>
       </Pressable>
 

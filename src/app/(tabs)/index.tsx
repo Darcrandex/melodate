@@ -4,19 +4,29 @@
  * @author darcrand
  */
 
-import { Link } from 'expo-router'
+import DatingListItem from '@/components/DatingListItem'
+import { activityApi } from '@/services/activity'
+import { datingApi } from '@/services/dating'
+import { useQuery } from '@tanstack/react-query'
 import { Text, View } from 'react-native'
 
 export default function Home() {
+  const { data: activities } = useQuery({
+    queryKey: ['activity', 'pages'],
+    queryFn: () => activityApi.pages(),
+  })
+
+  const { data: list } = useQuery({
+    queryKey: ['dating', 'pages'],
+    queryFn: () => datingApi.pages(),
+  })
+
   return (
     <>
       <Text>Home</Text>
+      <View>{activities?.data.records.map((v) => <Text key={v.id}>{v.title}</Text>)}</View>
 
-      <View>
-        <Link href='/dating/001'>001</Link>
-        <Link href='/dating/002'>002</Link>
-        <Link href='/dating/003'>003</Link>
-      </View>
+      <View>{list?.data.records.map((v) => <DatingListItem key={v.id} data={v} />)}</View>
     </>
   )
 }
