@@ -4,17 +4,29 @@
  * @author darcrand
  */
 
-import { Link } from 'expo-router'
-import { Text, View } from 'react-native'
+import { ticketApi } from '@/services/ticket'
+import { useQuery } from '@tanstack/react-query'
+import { useRouter } from 'expo-router'
+import { Pressable, Text, View } from 'react-native'
 
 export default function TicketList() {
+  const router = useRouter()
+
+  const { data: res } = useQuery({
+    queryKey: ['ticket', 'pages'],
+    queryFn: () => ticketApi.pages(),
+  })
+
   return (
     <>
       <Text>TicketList</Text>
 
       <View>
-        <Link href='/ticket/001'>Ticket 001</Link>
-        <Link href='/ticket/002'>Ticket 002</Link>
+        {res?.data?.records.map((v) => (
+          <Pressable key={v.id} onPress={() => router.push(`/ticket/${v.id}`)}>
+            <Text>门票{v.id}</Text>
+          </Pressable>
+        ))}
       </View>
     </>
   )

@@ -1,7 +1,10 @@
+import { ActivitySchema } from './activity'
+
 // 用户分享的活动现场，类似于微信朋友圈
 export type ShowSchema = {
   id: string
-  activityId: string
+
+  activity: ActivitySchema
 
   title: string
   description?: string
@@ -12,6 +15,8 @@ export type ShowSchema = {
   updated_at: string
 }
 
-export type ShowCreateDto = Omit<ShowSchema, 'id' | 'created_at' | 'updated_at'>
+export type ShowCreateDto = Omit<ShowSchema, 'id' | 'activity' | 'created_at' | 'updated_at'> & {
+  activityId: string
+}
 
-export type ShowUpdateDto = Omit<ShowSchema, 'created_at' | 'updated_at'>
+export type ShowUpdateDto = Omit<ShowSchema, 'created_at' | 'activity' | 'updated_at'>

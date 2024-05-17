@@ -15,6 +15,7 @@ export type DatingSchema = {
   nop: number // 人数
 
   status: number
+  members: UserSchema[] // 成员
 
   created_at: string
   updated_at: string
@@ -22,12 +23,13 @@ export type DatingSchema = {
 
 export type DatingCreateDto = Omit<
   DatingSchema,
-  'id' | 'publisher' | 'activity' | 'updated_at' | 'created_at' | 'status'
+  'id' | 'publisher' | 'activity' | 'members' | 'updated_at' | 'created_at' | 'status'
 > & { activityId: string }
 
 export type DatingUpdateDto = Omit<
   DatingSchema,
-  'publisher' | 'activity' | 'created_at' | 'updated_at'
+  'publisher' | 'activity' | 'members' | 'created_at' | 'updated_at'
 > & {
   activityId: string
+  memberIds: string[]
 }

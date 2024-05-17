@@ -3,12 +3,34 @@ import { TicketCreateDto, TicketSchema, TicketUpdateDto } from '@/types/schema/t
 
 export const ticketApi = {
   async pages(): Promise<ResponseSchema<PageData<TicketSchema>>> {
+    const records: Array<TicketSchema> = Array(10)
+      .fill(0)
+      .map((_, i) => ({
+        id: `id${i}`,
+        activity: {
+          id: `id${i}`,
+          title: `title${i}`,
+          type: `type${i}`,
+          cover: `cover${i}`,
+          description: `description${i}`,
+          price: i,
+          created_at: '2021-08-08 08:08:08',
+          updated_at: '2021-08-08 08:08:08',
+        },
+        time: '2021-08-08 08:08:08',
+        type: '早鸟票',
+        price: 1,
+        status: 0,
+        created_at: '2021-08-08 08:08:08',
+        updated_at: '2021-08-08 08:08:08',
+      }))
+
     return {
       data: {
         page: 1,
         size: 0,
         total: 0,
-        records: [],
+        records,
       },
       message: '',
       code: 0,
@@ -20,7 +42,17 @@ export const ticketApi = {
     return {
       data: {
         id,
-        activityId: '1',
+
+        activity: {
+          id: '1',
+          title: '666演唱会',
+          type: 'a',
+          cover: 'cover',
+          description: '俄美幸的演唱会',
+          price: 200,
+          created_at: '2021-08-08 08:08:08',
+          updated_at: '2021-08-08 08:08:08',
+        },
         time: '2021-08-08 08:08:08',
         type: '早鸟票',
         price: 1,
