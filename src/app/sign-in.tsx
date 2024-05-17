@@ -29,12 +29,12 @@ export default function SignIn() {
     <>
       <View style={{ margin: 50 }}>
         <Pressable onPress={onBack}>
-          <Text>go back</Text>
+          <Text className='m-2 text-emerald-300'>go back</Text>
         </Pressable>
       </View>
 
       <Pressable onPress={onLogin}>
-        <Text>登录</Text>
+        <Text className='m-2 text-red-300'>登录</Text>
       </Pressable>
     </>
   )
